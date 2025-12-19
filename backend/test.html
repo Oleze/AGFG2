@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Тест API</h2>
+  <button onclick="testGames()">Получить игры</button>
+  <button onclick="testRegister()">Зарегистрироваться</button>
+  <button onclick="testLogin()">Войти</button>
+  <pre id="result"></pre>
+
+  <script>
+    const API_URL = 'http://localhost:5000';
+    
+    async function testGames() {
+      const res = await fetch(API_URL + '/api/games');
+      const data = await res.json();
+      document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+    }
+    
+    async function testRegister() {
+      const res = await fetch(API_URL + '/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: 'test@test.com',
+          password: '123456',
+          username: 'testuser'
+        })
+      });
+      const data = await res.json();
+      document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+    }
+    
+    async function testLogin() {
+      const res = await fetch(API_URL + '/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: 'admin@test.com',
+          password: 'admin123'
+        })
+      });
+      const data = await res.json();
+      document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>

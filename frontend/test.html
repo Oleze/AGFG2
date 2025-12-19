@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Тест API</h1>
+  <button onclick="testApi()">Тест API</button>
+  <pre id="result"></pre>
+
+  <script>
+    async function testApi() {
+      try {
+        const res = await fetch('http://localhost:5000/api/games');
+        const data = await res.json();
+        document.getElementById('result').textContent = 
+          JSON.stringify(data, null, 2);
+        console.log('✅ API работает:', data);
+      } catch (error) {
+        document.getElementById('result').textContent = 
+          '❌ Ошибка: ' + error.message;
+        console.error('❌ API ошибка:', error);
+      }
+    }
+  </script>
+</body>
+</html>
